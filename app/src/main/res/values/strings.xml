@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Dogs</string>
+    <string name="dogs">Породы</string>
+    <string name="favorites">Понравившиеся</string>
+    <string name="back_desc">Перейти назад</string>
+    <string name="detail">Детали</string>
+</resources>
