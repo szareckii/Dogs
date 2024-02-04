@@ -1,7 +1,7 @@
 package com.zareckii.dogs.di
 
-import com.zareckii.dogs.data.BreedRepository
-import com.zareckii.dogs.data.BreedRepositoryImpl
+import com.zareckii.dogs.data.Repository
+import com.zareckii.dogs.data.RepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,6 +12,6 @@ import dagger.hilt.components.SingletonComponent
 interface DataModule {
     @Binds
     fun bindDogRepository(
-        dogRepository: BreedRepositoryImpl
-    ): BreedRepository
+        dogRepository: RepositoryImpl
+    ): Repository
 }
