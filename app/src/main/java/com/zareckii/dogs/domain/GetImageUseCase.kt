@@ -6,10 +6,10 @@ import com.zareckii.dogs.ui.breeds.models.ImageUi
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
-class GetImageRandomUseCase @Inject constructor(
+class GetImageUseCase @Inject constructor(
     private val repository: Repository,
     @IoDispatcher dispatcher: CoroutineDispatcher
 ) : UseCase<String, ImageUi>(dispatcher) {
     override suspend fun execute(parameters: String): ImageUi =
-        repository.getImageRandom(parameters)
+        repository.getImage(parameters)
 }

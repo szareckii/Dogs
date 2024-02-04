@@ -1,27 +1,44 @@
 package com.zareckii.dogs.data
 
+import com.zareckii.dogs.db.BreedEntity
 import com.zareckii.dogs.ui.breeds.models.BreedUi
-import com.zareckii.dogs.ui.breeds.models.ImageUI
 
 interface BreedMapper {
 
-    fun mapBreadsAPItoUI(breeds: BreedsApi): List<BreedUi>
+    fun mapBreadsApiToUI(breeds: BreedsApi): List<BreedUi>
 
-    fun mapImageRandomAPItoUI(image: ImageRandomApi): ImageUI
+    fun mapBreadsDbToUi(breeds: List<BreedEntity>): List<BreedUi>
 
-    fun mapImagesAPItoUI(images: ImagesApi): List<ImageUI>
+    fun mapBreadDbToUi(breed: BreedEntity): BreedUi
+
+    fun mapBreadsApiToDb(breeds: BreedsApi): List<BreedEntity>
 
     class Base : BreedMapper {
-        override fun mapBreadsAPItoUI(breeds: BreedsApi): List<BreedUi> =
+        override fun mapBreadsApiToUI(breeds: BreedsApi): List<BreedUi> =
             breeds.message.map { breed ->
-                BreedUi(breedName = breed.key, subBreeds = breed.value)
+                BreedUi(breedName = breed.key, subBreeds = breed.value, isFavorite = false)
             }
 
-        override fun mapImageRandomAPItoUI(image: ImageRandomApi): ImageUI =
-            ImageUI(image.message)
+        override fun mapBreadsDbToUi(breeds: List<BreedEntity>): List<BreedUi> =
+            breeds.map { breedDb ->
+                BreedUi(
+                    breedName = breedDb.breedName,
+                    subBreeds = emptyList(),
+                    isFavorite = breedDb.isFavorite
+                )
+            }
 
-        override fun mapImagesAPItoUI(images: ImagesApi): List<ImageUI> =
-            images.message.map { imageUrl -> ImageUI(imageUrl) }
+        override fun mapBreadDbToUi(breed: BreedEntity): BreedUi =
+            BreedUi(
+                breedName = breed.breedName,
+                subBreeds = emptyList(),
+                isFavorite = breed.isFavorite
+            )
+
+        override fun mapBreadsApiToDb(breeds: BreedsApi): List<BreedEntity> =
+            breeds.message.map { breedApi ->
+                BreedEntity(breedName = breedApi.key, isFavorite = false)
+            }
+
     }
-
 }

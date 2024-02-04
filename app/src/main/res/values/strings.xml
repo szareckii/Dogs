@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Dogs</string>
-    <string name="dogs">Породы</string>
-    <string name="favorites">Понравившиеся</string>
-    <string name="back_desc">Перейти назад</string>
-    <string name="detail">Детали</string>
+    <string name="dogs">Breeds</string>
+    <string name="favorites">Favorites</string>
+    <string name="back_desc">Go back</string>
+    <string name="detail">Detail</string>
+    <string name="add_favorite">Add to favorite</string>
+    <string name="next">Next</string>
+    <string name="remove_favorite">Remove to favorite</string>
 </resources>

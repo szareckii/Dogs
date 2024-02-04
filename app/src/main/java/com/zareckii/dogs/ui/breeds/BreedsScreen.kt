@@ -2,7 +2,7 @@ package com.zareckii.dogs.ui.breeds
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -11,7 +11,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.zareckii.dogs.ui.breeds.views.BreedItem
 import com.zareckii.dogs.ui.components.CircularProgressIndicatorDefault
 
@@ -28,7 +27,7 @@ fun BreedsScreen(
             CircularProgressIndicatorDefault()
         else
             LazyColumn(
-                modifier = Modifier.padding(),
+                modifier = Modifier.navigationBarsPadding(),
                 state = rememberLazyListState(),
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)

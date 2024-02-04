@@ -1,18 +1,16 @@
 package com.zareckii.dogs.domain
 
-import com.zareckii.dogs.data.BreedRepository
-import com.zareckii.dogs.data.ImageRandomApi
-import com.zareckii.dogs.data.ImagesApi
+import com.zareckii.dogs.data.Repository
 import com.zareckii.dogs.di.IoDispatcher
-import com.zareckii.dogs.ui.breeds.models.BreedUi
-import com.zareckii.dogs.ui.breeds.models.ImageUI
+import com.zareckii.dogs.ui.breeds.models.ImageUi
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetImagesUseCase @Inject constructor(
-    private val repository: BreedRepository,
+    private val repository: Repository,
     @IoDispatcher dispatcher: CoroutineDispatcher
-) : UseCase<String, List<ImageUI>>(dispatcher) {
-    override suspend fun execute(parameters: String): List<ImageUI> =
-        repository.getImages(parameters)
+) : UseCase<String, Flow<List<ImageUi>>>(dispatcher) {
+    override suspend fun execute(parameters: String): Flow<List<ImageUi>> =
+        repository.getImagesDb(parameters)
 }

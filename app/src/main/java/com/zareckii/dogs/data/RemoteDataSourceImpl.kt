@@ -4,9 +4,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class BreedNetworkDataSource @Inject constructor(
+class RemoteDataSourceImpl @Inject constructor(
     private val service: BreedService
-) : BreedDataSource {
+) : RemoteDataSource {
 
     override suspend fun getBreeds(): BreedsApi =
         service.getBreeds()

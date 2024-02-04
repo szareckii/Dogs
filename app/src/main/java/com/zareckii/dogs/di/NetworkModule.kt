@@ -2,10 +2,14 @@ package com.zareckii.dogs.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.zareckii.dogs.data.BreedDataSource
-import com.zareckii.dogs.data.BreedNetworkDataSource
+import com.zareckii.dogs.data.RemoteDataSource
+import com.zareckii.dogs.data.RemoteDataSourceImpl
 import com.zareckii.dogs.data.BreedService
 import com.zareckii.dogs.BuildConfig
+import com.zareckii.dogs.data.LocalDataSource
+import com.zareckii.dogs.data.LocalDataSourceImpl
+import com.zareckii.dogs.db.BreedsDao
+import com.zareckii.dogs.db.ImagesDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -78,9 +82,17 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideCameraNetworkDataSource(
-        cameraService: BreedService
-    ): BreedDataSource =
-        BreedNetworkDataSource(cameraService)
+    fun provideBreedRemoteDataSource(
+        breedService: BreedService
+    ): RemoteDataSource =
+        RemoteDataSourceImpl(breedService)
+
+    @Provides
+    @Singleton
+    fun provideBreedLocalDataSource(
+        breedDao: BreedsDao,
+        imagesDao: ImagesDao
+    ): LocalDataSource =
+        LocalDataSourceImpl(breedDao, imagesDao)
 
 }

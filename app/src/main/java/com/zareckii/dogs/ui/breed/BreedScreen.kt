@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.rememberScaffoldState
@@ -15,12 +16,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
@@ -66,7 +70,9 @@ fun BreedScreen(
                     )
                     Text(
                         text = breed.capitalize(Locale.current),
-                        modifier = Modifier.padding(16.dp)
+                        modifier = Modifier.padding(16.dp).fillMaxWidth(),
+                        textAlign = TextAlign.Center,
+                        fontSize = 24.sp
                     )
                     Row(
                         modifier = Modifier
@@ -76,15 +82,28 @@ fun BreedScreen(
                     ) {
                         Button(
                             onClick = breedViewModel::onClickLike,
-                            modifier = Modifier.weight(0.5F)
+                            modifier = Modifier.weight(0.5F),
+                            colors = ButtonDefaults.buttonColors(
+                                backgroundColor = if (currentImage?.isFavorite == true)
+                                    Color.Red
+                                else
+                                    Color.Blue
+                            )
                         ) {
-                            Text(text = "Like")
+                            Text(
+                                text = stringResource(
+                                    if (currentImage?.isFavorite == true)
+                                        R.string.remove_favorite
+                                    else
+                                        R.string.add_favorite
+                                )
+                            )
                         }
                         Button(
                             onClick = breedViewModel::onClickNext,
                             modifier = Modifier.weight(0.5F)
                         ) {
-                            Text(text = "Next")
+                            Text(text = stringResource(R.string.next))
                         }
                     }
                 }

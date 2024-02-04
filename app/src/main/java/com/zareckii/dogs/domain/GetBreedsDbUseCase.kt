@@ -4,12 +4,14 @@ import com.zareckii.dogs.data.Repository
 import com.zareckii.dogs.di.IoDispatcher
 import com.zareckii.dogs.ui.breeds.models.BreedUi
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetBreedsUseCase @Inject constructor(
+class GetBreedsDbUseCase @Inject constructor(
     private val repository: Repository,
     @IoDispatcher dispatcher: CoroutineDispatcher
-) : UseCase<Unit, List<BreedUi>>(dispatcher) {
-    override suspend fun execute(parameters: Unit): List<BreedUi> =
-        repository.getBreeds()
+) : UseCase<Unit, Flow<List<BreedUi>>>(dispatcher) {
+    override suspend fun execute(parameters: Unit): Flow<List<BreedUi>> {
+        return repository.getBreedsDb()
+    }
 }
