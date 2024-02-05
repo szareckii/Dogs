@@ -30,7 +30,9 @@ class BreedsViewModel @Inject constructor(
         viewModelScope.launch {
             launch {
                 val breedsFlow = getBreedsDbUseCase(Unit).successOr(emptyFlow())
-                breedsFlow.distinctUntilChanged().collect { breeds ->
+                breedsFlow
+                    .distinctUntilChanged()
+                    .collect { breeds ->
                     _viewState.update {
                         it.copy(
                             breeds = breeds,

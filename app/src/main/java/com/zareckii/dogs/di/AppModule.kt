@@ -2,6 +2,7 @@ package com.zareckii.dogs.di
 
 import com.zareckii.dogs.data.BreedMapper
 import com.zareckii.dogs.data.ImageMapper
+import com.zareckii.dogs.utils.Now
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,4 +20,8 @@ class AppModule {
     @Provides
     @Singleton
     fun provideImageMapper(): ImageMapper = ImageMapper.Base()
+
+    @Provides
+    @Singleton
+    fun provideNow(): Now = Now.Base()
 }

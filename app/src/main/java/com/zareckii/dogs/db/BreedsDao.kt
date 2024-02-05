@@ -15,9 +15,6 @@ interface BreedsDao {
     @Query("SELECT * FROM breeds WHERE breed_name = :breed")
     suspend fun getBreed(breed: String): BreedEntity
 
-    @Query("SELECT * FROM breeds WHERE is_favorite = :isFavorite")
-    fun getFavoriteBreeds(isFavorite: Boolean): Flow<List<BreedEntity>>
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAllBreeds(breeds: List<BreedEntity>)
 

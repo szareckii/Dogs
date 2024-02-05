@@ -1,4 +1,4 @@
-package com.zareckii.dogs.ui.breed
+package com.zareckii.dogs.ui.breeddetail
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -33,22 +33,20 @@ import com.zareckii.dogs.ui.components.AppBarDefault
 import com.zareckii.dogs.ui.components.CircularProgressIndicatorDefault
 
 @Composable
-fun BreedScreen(
+fun BreedDetailScreen(
     breed: String,
-    modifier: Modifier = Modifier,
-    breedViewModel: BreedViewModel = hiltViewModel(),
+    breedDetailViewModel: BreedDetailViewModel = hiltViewModel(),
     onClickBack: () -> Unit,
 ) {
 
-    val viewState = breedViewModel.viewState.collectAsStateWithLifecycle()
+    val viewState = breedDetailViewModel.viewState.collectAsStateWithLifecycle()
 
     LaunchedEffect(breed) {
-        breedViewModel.init(breed)
+        breedDetailViewModel.init(breed)
     }
 
     with(viewState.value) {
         Scaffold(
-            modifier = modifier,
             scaffoldState = rememberScaffoldState(),
             topBar = {
                 AppBarDefault(title = stringResource(R.string.detail), onClickBack = onClickBack)
@@ -81,7 +79,7 @@ fun BreedScreen(
                         horizontalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         Button(
-                            onClick = breedViewModel::onClickLike,
+                            onClick = breedDetailViewModel::onClickLike,
                             modifier = Modifier.weight(0.5F),
                             colors = ButtonDefaults.buttonColors(
                                 backgroundColor = if (currentImage?.isFavorite == true)
@@ -100,7 +98,7 @@ fun BreedScreen(
                             )
                         }
                         Button(
-                            onClick = breedViewModel::onClickNext,
+                            onClick = breedDetailViewModel::onClickNext,
                             modifier = Modifier.weight(0.5F)
                         ) {
                             Text(text = stringResource(R.string.next))

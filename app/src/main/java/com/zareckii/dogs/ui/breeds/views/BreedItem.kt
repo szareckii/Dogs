@@ -2,6 +2,7 @@ package com.zareckii.dogs.ui.breeds.views
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Text
@@ -20,9 +21,10 @@ fun BreedItem(
     onClick: () -> Unit
 ) {
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(8.dp),
+        shape = RoundedCornerShape(8.dp),
         onClick = onClick
     ) {
         Text(text = breed.breedName.capitalize(Locale.current), modifier = Modifier.padding(16.dp))

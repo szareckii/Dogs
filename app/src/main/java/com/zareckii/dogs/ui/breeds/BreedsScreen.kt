@@ -1,13 +1,16 @@
 package com.zareckii.dogs.ui.breeds
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -16,8 +19,9 @@ import com.zareckii.dogs.ui.components.CircularProgressIndicatorDefault
 
 @Composable
 fun BreedsScreen(
+    innerPadding: PaddingValues,
     breedsViewModel: BreedsViewModel = hiltViewModel(),
-    onClick: (String) -> Unit
+    onClickBread: (String) -> Unit
 ) {
 
     val viewState = breedsViewModel.viewState.collectAsStateWithLifecycle()
@@ -27,7 +31,10 @@ fun BreedsScreen(
             CircularProgressIndicatorDefault()
         else
             LazyColumn(
-                modifier = Modifier.navigationBarsPadding(),
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(innerPadding)
+                    .background(Color.LightGray.copy(0.9F)),
                 state = rememberLazyListState(),
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -35,7 +42,7 @@ fun BreedsScreen(
                 items(items = breeds, key = { it.breedName }) { breed ->
                     BreedItem(
                         breed = breed,
-                        onClick = { onClick(breed.breedName) }
+                        onClick = { onClickBread(breed.breedName) }
                     )
                 }
             }

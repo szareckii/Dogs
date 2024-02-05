@@ -1,11 +1,11 @@
-package com.zareckii.dogs.ui.breed
+package com.zareckii.dogs.ui.breeddetail
 
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zareckii.dogs.data.successOr
 import com.zareckii.dogs.domain.FetchImagesDbUseCase
-import com.zareckii.dogs.ui.breed.models.BreedViewState
+import com.zareckii.dogs.ui.breeddetail.models.BreedDetailViewState
 import com.zareckii.dogs.domain.GetImageRandomUseCase
 import com.zareckii.dogs.domain.GetImageUseCase
 import com.zareckii.dogs.domain.GetImagesUseCase
@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class BreedViewModel @Inject constructor(
+class BreedDetailViewModel @Inject constructor(
     private val getImageRandomUseCase: GetImageRandomUseCase,
     private val getImagesUseCase: GetImagesUseCase,
     private val fetchImagesDbUseCase: FetchImagesDbUseCase,
@@ -29,8 +29,8 @@ class BreedViewModel @Inject constructor(
     private val getImageUseCase: GetImageUseCase
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(BreedViewState())
-    val viewState: StateFlow<BreedViewState> = _viewState
+    private val _viewState = MutableStateFlow(BreedDetailViewState())
+    val viewState: StateFlow<BreedDetailViewState> = _viewState
 
     fun init(breed: String) {
         if (_viewState.value.currentImage == null)

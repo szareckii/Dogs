@@ -3,6 +3,7 @@ package com.zareckii.dogs.data
 import com.zareckii.dogs.db.BreedEntity
 import com.zareckii.dogs.db.BreedsDao
 import com.zareckii.dogs.db.ImageEntity
+import com.zareckii.dogs.db.ImageLastFavorite
 import com.zareckii.dogs.db.ImagesDao
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -20,9 +21,6 @@ class LocalDataSourceImpl @Inject constructor(
     override suspend fun getBreed(breed: String): BreedEntity =
         breedsDao.getBreed(breed)
 
-    override fun getFavoriteBreeds(isFavorite: Boolean): Flow<List<BreedEntity>> =
-        breedsDao.getFavoriteBreeds(isFavorite)
-
     override suspend fun insertAllBreeds(breeds: List<BreedEntity>) =
         breedsDao.insertAllBreeds(breeds)
 
@@ -32,9 +30,15 @@ class LocalDataSourceImpl @Inject constructor(
     override suspend fun insertAllImages(images: List<ImageEntity>) =
         imagesDao.insertAllImages(images)
 
-    override suspend fun updateImageFavorite(imageUrl: String, isFavorite: Boolean) =
-        imagesDao.updateImageFavorite(imageUrl, isFavorite)
+    override suspend fun updateImageFavorite(imageUrl: String, isFavorite: Boolean, added: Long?) =
+        imagesDao.updateImageFavorite(imageUrl, isFavorite, added)
 
     override suspend fun getImage(imageUrl: String): ImageEntity =
         imagesDao.getImage(imageUrl)
+
+    override fun getFavoriteBreeds(): Flow<List<ImageLastFavorite>> =
+        imagesDao.getFavoriteBreeds()
+
+    override fun getFavoriteImages(breed: String): Flow<List<String>> =
+        imagesDao.getFavoriteImages(breed)
 }

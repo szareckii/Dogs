@@ -1,6 +1,7 @@
 package com.zareckii.dogs.data
 
 import com.zareckii.dogs.db.BreedEntity
+import com.zareckii.dogs.db.ImageLastFavorite
 import com.zareckii.dogs.ui.breeds.models.BreedUi
 
 interface BreedMapper {
@@ -13,31 +14,36 @@ interface BreedMapper {
 
     fun mapBreadsApiToDb(breeds: BreedsApi): List<BreedEntity>
 
+    fun mapImageLstFavoriteToUI(names: List<ImageLastFavorite>): List<BreedUi>
+
     class Base : BreedMapper {
         override fun mapBreadsApiToUI(breeds: BreedsApi): List<BreedUi> =
             breeds.message.map { breed ->
-                BreedUi(breedName = breed.key, subBreeds = breed.value, isFavorite = false)
+                BreedUi(breedName = breed.key, subBreeds = breed.value)
             }
 
         override fun mapBreadsDbToUi(breeds: List<BreedEntity>): List<BreedUi> =
             breeds.map { breedDb ->
                 BreedUi(
                     breedName = breedDb.breedName,
-                    subBreeds = emptyList(),
-                    isFavorite = breedDb.isFavorite
+                    subBreeds = emptyList()
                 )
             }
 
         override fun mapBreadDbToUi(breed: BreedEntity): BreedUi =
             BreedUi(
                 breedName = breed.breedName,
-                subBreeds = emptyList(),
-                isFavorite = breed.isFavorite
+                subBreeds = emptyList()
             )
 
         override fun mapBreadsApiToDb(breeds: BreedsApi): List<BreedEntity> =
             breeds.message.map { breedApi ->
-                BreedEntity(breedName = breedApi.key, isFavorite = false)
+                BreedEntity(breedName = breedApi.key)
+            }
+
+        override fun mapImageLstFavoriteToUI(names: List<ImageLastFavorite>): List<BreedUi> =
+            names.map { breed ->
+                BreedUi(breedName = breed.breedName, subBreeds = emptyList(), imageUrl = breed.imageUrl)
             }
 
     }

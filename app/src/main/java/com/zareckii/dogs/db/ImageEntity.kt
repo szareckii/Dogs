@@ -4,9 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(
-    tableName = "images",
-)
+@Entity(tableName = "images")
 
 data class ImageEntity(
     @PrimaryKey
@@ -15,5 +13,7 @@ data class ImageEntity(
     @ColumnInfo(name = "breed_name")
     val breedName: String,
     @ColumnInfo(name = "is_favorite")
-    val isFavorite: Boolean
+    val isFavorite: Boolean,
+    @ColumnInfo(name = "added")
+    val added: Long? = null
 )

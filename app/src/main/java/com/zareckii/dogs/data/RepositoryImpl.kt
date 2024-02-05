@@ -39,7 +39,7 @@ class RepositoryImpl @Inject constructor(
     override fun getImagesDb(breed: String): Flow<List<ImageUi>> =
         dataSourceLocal.getImages(breed).map {
             imageMapper.mapImagesDbToUI(it)
-    }
+        }
 
     override suspend fun fetchImagesDb(breed: String) {
         val imagesApi = dataSourceRemote.getImages(breed)
@@ -47,10 +47,18 @@ class RepositoryImpl @Inject constructor(
         dataSourceLocal.insertAllImages(imagesDb)
     }
 
-    override suspend fun updateImageFavorite(imageUrl: String, isFavorite: Boolean) =
-        dataSourceLocal.updateImageFavorite(imageUrl, isFavorite)
+    override suspend fun updateImageFavorite(imageUrl: String, isFavorite: Boolean, added: Long?) =
+        dataSourceLocal.updateImageFavorite(imageUrl, isFavorite, added)
 
     override suspend fun getImage(imageUrl: String): ImageUi =
         imageMapper.mapImageDbToUI(dataSourceLocal.getImage(imageUrl))
+
+    override fun getFavoriteBreeds(): Flow<List<BreedUi>> =
+        dataSourceLocal.getFavoriteBreeds().map {
+            breedMapper.mapImageLstFavoriteToUI(it)
+        }
+
+    override fun getFavoriteImages(breed: String): Flow<List<String>> =
+        dataSourceLocal.getFavoriteImages(breed)
 
 }

@@ -7,7 +7,8 @@ import com.zareckii.dogs.R
 enum class NavigationTree {
     Breeds,
     Favorites,
-    Breed
+    Breed,
+    FavoriteImages
 }
 
 sealed class ScreenBottomNav(val route: String, @StringRes val title: Int, @DrawableRes val icon: Int) {

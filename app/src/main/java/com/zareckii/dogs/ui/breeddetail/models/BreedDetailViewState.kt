@@ -1,10 +1,10 @@
-package com.zareckii.dogs.ui.breed.models
+package com.zareckii.dogs.ui.breeddetail.models
 
 import androidx.compose.runtime.Immutable
 import com.zareckii.dogs.ui.breeds.models.ImageUi
 
 @Immutable
-data class BreedViewState(
+data class BreedDetailViewState(
     val isLoading: Boolean = true,
     val breedName: String = "",
     val currentImage: ImageUi? = null,

@@ -12,8 +12,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.zareckii.dogs.ui.breed.BreedScreen
+import com.zareckii.dogs.ui.breeddetail.BreedDetailScreen
 import com.zareckii.dogs.ui.breeds.BreedsScreen
+import com.zareckii.dogs.ui.favoriteimages.FavoriteImagesScreen
 import com.zareckii.dogs.ui.favorites.FavoritesScreen
 
 @Composable
@@ -33,18 +34,39 @@ fun AppNavGraph(
             modifier = modifier.padding(padding)
         ) {
             composable(NavigationTree.Breeds.name) {
-                BreedsScreen(onClick = { bread -> navController.navigate(NavigationTree.Breed.name + "/$bread") })
+                BreedsScreen(
+                    innerPadding = innerPadding,
+                    onClickBread = { bread ->
+                        navController.navigate(NavigationTree.Breed.name + "/$bread")
+                    }
+                )
             }
-            composable(NavigationTree.Favorites.name) { FavoritesScreen(navController) }
+            composable(NavigationTree.Favorites.name) {
+                FavoritesScreen(innerPadding = innerPadding,
+                    onClickBreed = { bread ->
+                        navController.navigate(NavigationTree.FavoriteImages.name + "/$bread")
+                    }
+                )
+            }
             composable(
                 NavigationTree.Breed.name + "/{breed}",
                 arguments = listOf(navArgument("breed") { type = NavType.StringType })
             ) { backStackEntry ->
-                BreedScreen(
+                BreedDetailScreen(
                     backStackEntry.arguments?.getString("breed") ?: "",
                     onClickBack = { navController.popBackStack() },
                 )
             }
+            composable(
+                NavigationTree.FavoriteImages.name + "/{breed}",
+                arguments = listOf(navArgument("breed") { type = NavType.StringType })
+            ) { backStackEntry ->
+                FavoriteImagesScreen(
+                    backStackEntry.arguments?.getString("breed") ?: "",
+                    onClickBack = { navController.popBackStack() },
+                )
+            }
+
         }
     }
 }
