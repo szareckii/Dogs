@@ -1,6 +1,5 @@
 package com.zareckii.dogs.ui.breeddetail
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zareckii.dogs.data.successOr
@@ -35,11 +34,11 @@ class BreedDetailViewModel @Inject constructor(
     fun init(breed: String) {
         if (_viewState.value.currentImage == null)
             viewModelScope.launch {
-
                 launch {
                     val imageUrl = getImageRandomUseCase(breed).successOr(null)
                     _viewState.update {
                         it.copy(
+                            breedName = breed,
                             isLoading = false,
                             currentImage = imageUrl
                         )
@@ -54,8 +53,6 @@ class BreedDetailViewModel @Inject constructor(
                 }
 
                 launch {
-                    Log.e("stas", "fetchImagesDbUseCase!!!!!!!!!!")
-
                     fetchImagesDbUseCase(breed)
                 }
             }
@@ -73,9 +70,6 @@ class BreedDetailViewModel @Inject constructor(
 
     fun onClickNext() {
         val nextImage = _viewState.value.images.randomOrNull()
-
-        Log.e("stas", "nextImage -> $nextImage")
-
         _viewState.update { it.copy(currentImage = nextImage) }
     }
 

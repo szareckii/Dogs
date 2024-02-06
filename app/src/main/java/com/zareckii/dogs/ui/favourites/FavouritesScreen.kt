@@ -1,4 +1,4 @@
-package com.zareckii.dogs.ui.favorites
+package com.zareckii.dogs.ui.favourites
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -9,12 +9,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -22,19 +22,19 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.zareckii.dogs.R
 import com.zareckii.dogs.ui.components.CircularProgressIndicatorDefault
-import com.zareckii.dogs.ui.favorites.views.BreedFavoriteItem
+import com.zareckii.dogs.ui.favourites.views.BreedFavoriteItem
 
 @Composable
 fun FavoritesScreen(
     innerPadding: PaddingValues,
-    favoritesViewModel: FavoritesViewModel = hiltViewModel(),
+    favouritesViewModel: FavouritesViewModel = hiltViewModel(),
     onClickBreed: (String) -> Unit
 ) {
 
-    val viewState = favoritesViewModel.viewState.collectAsStateWithLifecycle()
+    val viewState = favouritesViewModel.viewState.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
-        favoritesViewModel.init()
+        favouritesViewModel.init()
     }
 
     with(viewState.value) {
@@ -43,7 +43,7 @@ fun FavoritesScreen(
         else if (breeds.isEmpty())
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(
-                    text = stringResource(R.string.no_favorites),
+                    text = stringResource(R.string.no_favourites),
                     fontSize = 24.sp
                 )
             }
@@ -52,7 +52,7 @@ fun FavoritesScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding)
-                    .background(Color.LightGray.copy(0.2F)),
+                    .background(MaterialTheme.colors.primary),
                 state = rememberLazyListState(),
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)

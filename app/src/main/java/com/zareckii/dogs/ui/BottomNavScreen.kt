@@ -26,7 +26,7 @@ fun BottomNavScreen(modifier: Modifier = Modifier) {
     val bottomBarTab = remember {
         listOf(
             ScreenBottomNav.Breeds,
-            ScreenBottomNav.Favorites,
+            ScreenBottomNav.Favourites,
         )
     }
 
@@ -38,7 +38,6 @@ fun BottomNavScreen(modifier: Modifier = Modifier) {
     Scaffold(
         bottomBar = {
             if (shouldShowBottomBar) {
-
                     BottomNavigation(modifier = modifier) {
                         bottomBarTab.forEach { screen ->
                             BottomNavigationItem(

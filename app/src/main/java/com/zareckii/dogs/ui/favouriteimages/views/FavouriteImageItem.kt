@@ -1,61 +1,62 @@
-package com.zareckii.dogs.ui.favoriteimages.views
+package com.zareckii.dogs.ui.favouriteimages.views
 
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
 import androidx.compose.material.Card
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Text
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.zareckii.dogs.R
 
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun FavoriteImageItem(
     image: String,
     modifier: Modifier = Modifier,
-    onClickNotFavorite: () -> Unit
+    onClickRemoveFavorite: () -> Unit
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
             .padding(8.dp),
-        shape = RoundedCornerShape(8.dp),
-        onClick = onClickNotFavorite
+        shape = RoundedCornerShape(8.dp)
     ) {
-        Row(
-            modifier = Modifier.padding(16.dp),
-            verticalAlignment = Alignment.CenterVertically
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.TopEnd
         ) {
             AsyncImage(
                 model = image,
                 modifier = Modifier
-                    .size(64.dp)
+                    .fillMaxWidth()
                     .clip(shape = RoundedCornerShape(8.dp)),
                 contentScale = ContentScale.Crop,
                 contentDescription = null,
                 error = painterResource(R.drawable.ic_dog)
             )
-            Spacer(modifier = Modifier.width(16.dp))
-            Button(onClick = onClickNotFavorite) {
-                Text(
-                    text = "Remove favorite",
-                    modifier = Modifier.padding(16.dp)
+            IconButton(onClick = onClickRemoveFavorite) {
+                Icon(
+                    imageVector = Icons.Filled.Star,
+                    contentDescription = stringResource(R.string.remove),
+                    modifier = Modifier
+                        .padding(16.dp)
+                        .size(36.dp),
+                    tint = MaterialTheme.colors.primary
                 )
             }
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package com.zareckii.dogs.ui.favoriteimages
+package com.zareckii.dogs.ui.favouriteimages
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -6,7 +6,7 @@ import com.zareckii.dogs.data.successOr
 import com.zareckii.dogs.domain.GetFavoriteImagesUseCase
 import com.zareckii.dogs.domain.ImageFavorite
 import com.zareckii.dogs.domain.UpdateImageFavoriteUseCase
-import com.zareckii.dogs.ui.favoriteimages.models.FavoriteImagesViewState
+import com.zareckii.dogs.ui.favouriteimages.models.FavouriteImagesViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,13 +16,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class FavoriteImagesViewModel @Inject constructor(
+class FavouriteImagesViewModel @Inject constructor(
     private val getFavoriteImagesUseCase: GetFavoriteImagesUseCase,
     private val updateImageFavoriteUseCase: UpdateImageFavoriteUseCase
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(FavoriteImagesViewState())
-    val viewState: StateFlow<FavoriteImagesViewState> = _viewState
+    private val _viewState = MutableStateFlow(FavouriteImagesViewState())
+    val viewState: StateFlow<FavouriteImagesViewState> = _viewState
 
     fun init(breed: String) {
         viewModelScope.launch {
@@ -46,4 +46,5 @@ class FavoriteImagesViewModel @Inject constructor(
             updateImageFavoriteUseCase(ImageFavorite(imageUrl, isFavorite = false))
         }
     }
+
 }

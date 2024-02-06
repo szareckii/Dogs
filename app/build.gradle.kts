@@ -68,6 +68,7 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.7.6")
     implementation("androidx.compose.material:material:1.6.0")
     implementation("androidx.lifecycle:lifecycle-runtime-compose:2.7.0")
+    implementation("androidx.compose.material:material-icons-extended:1.6.0")
 
     // Hilt
     implementation("com.google.dagger:hilt-android:2.50")

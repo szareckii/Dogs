@@ -14,8 +14,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.zareckii.dogs.ui.breeddetail.BreedDetailScreen
 import com.zareckii.dogs.ui.breeds.BreedsScreen
-import com.zareckii.dogs.ui.favoriteimages.FavoriteImagesScreen
-import com.zareckii.dogs.ui.favorites.FavoritesScreen
+import com.zareckii.dogs.ui.favouriteimages.FavoriteImagesScreen
+import com.zareckii.dogs.ui.favourites.FavoritesScreen
 
 @Composable
 fun AppNavGraph(
@@ -41,7 +41,7 @@ fun AppNavGraph(
                     }
                 )
             }
-            composable(NavigationTree.Favorites.name) {
+            composable(NavigationTree.Favourites.name) {
                 FavoritesScreen(innerPadding = innerPadding,
                     onClickBreed = { bread ->
                         navController.navigate(NavigationTree.FavoriteImages.name + "/$bread")

@@ -1,12 +1,17 @@
 <resources>
     <string name="app_name">Dogs</string>
     <string name="dogs">Breeds</string>
-    <string name="favorites">Favorites</string>
+    <string name="favourites">Favourites</string>
     <string name="back_desc">Go back</string>
     <string name="detail">Detail</string>
-    <string name="add_favorite">Add to favorite</string>
+    <string name="add_favourite">Add to favourite</string>
     <string name="next">Next</string>
-    <string name="remove_favorite">Remove to favorite</string>
-    <string name="no_favorites">No favorites yet</string>
-    <string name="favorite_photo">Favorite photo</string>
+    <string name="remove_favourite">Remove from favourite</string>
+    <string name="no_favourites">No favourites yet</string>
+    <string name="favourites_photo">Favourite photo</string>
+    <string name="ok">OK</string>
+    <string name="lis_image_empty">The list of image is empty!</string>
+    <string name="ups">Ups</string>
+    <string name="remove">Remove</string>
+    <string name="add">Add to favourites</string>
 </resources>

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -25,6 +26,7 @@ fun BreedItem(
             .fillMaxWidth()
             .padding(8.dp),
         shape = RoundedCornerShape(8.dp),
+        backgroundColor = MaterialTheme.colors.secondary,
         onClick = onClick
     ) {
         Text(text = breed.breedName.capitalize(Locale.current), modifier = Modifier.padding(16.dp))
