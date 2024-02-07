@@ -1,4 +1,4 @@
-package com.zareckii.dogs.navigation
+package com.zareckii.dogs.ui.navigation
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.navigationBarsPadding

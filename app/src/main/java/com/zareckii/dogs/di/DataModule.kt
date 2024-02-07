@@ -4,6 +4,8 @@ import com.zareckii.dogs.data.network.repository.BreedRepositoryImpl
 import com.zareckii.dogs.domain.repository.ImageRepository
 import com.zareckii.dogs.data.network.repository.ImageRepositoryImpl
 import com.zareckii.dogs.domain.repository.BreedRepository
+import com.zareckii.dogs.utils.ConnectivityManagerNetworkMonitor
+import com.zareckii.dogs.utils.NetworkMonitor
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,4 +24,9 @@ interface DataModule {
     fun bindImageRepository(
         dogRepository: ImageRepositoryImpl
     ): ImageRepository
+
+    @Binds
+    fun bindsNetworkMonitor(
+        networkMonitor: ConnectivityManagerNetworkMonitor,
+    ): NetworkMonitor
 }
