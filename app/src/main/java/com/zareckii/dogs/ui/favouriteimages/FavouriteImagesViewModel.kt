@@ -2,10 +2,10 @@ package com.zareckii.dogs.ui.favouriteimages
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zareckii.dogs.data.successOr
-import com.zareckii.dogs.domain.GetFavoriteImagesUseCase
-import com.zareckii.dogs.domain.ImageFavorite
-import com.zareckii.dogs.domain.UpdateImageFavoriteUseCase
+import com.zareckii.dogs.data.network.successOr
+import com.zareckii.dogs.domain.usecase.imageusecase.GetFavoriteImagesUseCase
+import com.zareckii.dogs.domain.model.ImageFavorite
+import com.zareckii.dogs.domain.usecase.imageusecase.UpdateImageFavoriteUseCase
 import com.zareckii.dogs.ui.favouriteimages.models.FavouriteImagesViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

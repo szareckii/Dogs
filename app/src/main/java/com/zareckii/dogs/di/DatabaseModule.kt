@@ -1,7 +1,7 @@
 package com.zareckii.dogs.di
 
 import android.content.Context
-import com.zareckii.dogs.db.AppDatabase
+import com.zareckii.dogs.data.db.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

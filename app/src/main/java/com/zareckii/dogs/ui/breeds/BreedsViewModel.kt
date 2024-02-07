@@ -2,9 +2,9 @@ package com.zareckii.dogs.ui.breeds
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zareckii.dogs.data.successOr
-import com.zareckii.dogs.domain.FetchBreedsDbUseCase
-import com.zareckii.dogs.domain.GetBreedsDbUseCase
+import com.zareckii.dogs.data.network.successOr
+import com.zareckii.dogs.domain.usecase.breedusecase.FetchBreedsDbUseCase
+import com.zareckii.dogs.domain.usecase.breedusecase.GetBreedsDbUseCase
 import com.zareckii.dogs.ui.breeds.models.BreedsViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

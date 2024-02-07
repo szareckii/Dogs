@@ -2,14 +2,14 @@ package com.zareckii.dogs.di
 
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.zareckii.dogs.data.RemoteDataSource
-import com.zareckii.dogs.data.RemoteDataSourceImpl
-import com.zareckii.dogs.data.BreedService
+import com.zareckii.dogs.data.network.datasource.RemoteDataSource
+import com.zareckii.dogs.data.network.datasource.RemoteDataSourceImpl
+import com.zareckii.dogs.data.network.BreedService
 import com.zareckii.dogs.BuildConfig
-import com.zareckii.dogs.data.LocalDataSource
-import com.zareckii.dogs.data.LocalDataSourceImpl
-import com.zareckii.dogs.db.BreedsDao
-import com.zareckii.dogs.db.ImagesDao
+import com.zareckii.dogs.data.network.datasource.LocalDataSource
+import com.zareckii.dogs.data.network.datasource.LocalDataSourceImpl
+import com.zareckii.dogs.data.db.BreedsDao
+import com.zareckii.dogs.data.db.ImagesDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -24,6 +24,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
+
     @Provides
     fun provideBaseUrl(): String = "https://dog.ceo/api/"
 

@@ -1,8 +1,8 @@
 package com.zareckii.dogs.di
 
-import com.zareckii.dogs.db.AppDatabase
-import com.zareckii.dogs.db.BreedsDao
-import com.zareckii.dogs.db.ImagesDao
+import com.zareckii.dogs.data.db.AppDatabase
+import com.zareckii.dogs.data.db.BreedsDao
+import com.zareckii.dogs.data.db.ImagesDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

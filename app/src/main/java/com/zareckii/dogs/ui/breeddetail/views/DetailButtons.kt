@@ -19,7 +19,6 @@ import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.zareckii.dogs.R
 import com.zareckii.dogs.ui.breeds.models.ImageUi
 
@@ -42,7 +41,7 @@ fun DetailButtons(
                 .padding(16.dp)
                 .fillMaxWidth(),
             textAlign = TextAlign.Center,
-            fontSize = 24.sp
+            style = MaterialTheme.typography.h5
         )
         Button(
             onClick = onClickLike,
@@ -56,7 +55,7 @@ fun DetailButtons(
                     if (currentImage.isFavorite) R.string.remove else R.string.add
                 ),
                 modifier = Modifier.padding(end = 4.dp),
-                tint = MaterialTheme.colors.error
+                tint = MaterialTheme.colors.onPrimary
             )
             Text(
                 text = stringResource(

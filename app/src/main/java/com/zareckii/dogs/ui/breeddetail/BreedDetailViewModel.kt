@@ -2,14 +2,14 @@ package com.zareckii.dogs.ui.breeddetail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.zareckii.dogs.data.successOr
-import com.zareckii.dogs.domain.FetchImagesDbUseCase
+import com.zareckii.dogs.data.network.successOr
+import com.zareckii.dogs.domain.usecase.imageusecase.FetchImagesDbUseCase
 import com.zareckii.dogs.ui.breeddetail.models.BreedDetailViewState
-import com.zareckii.dogs.domain.GetImageRandomUseCase
-import com.zareckii.dogs.domain.GetImageUseCase
-import com.zareckii.dogs.domain.GetImagesUseCase
-import com.zareckii.dogs.domain.ImageFavorite
-import com.zareckii.dogs.domain.UpdateImageFavoriteUseCase
+import com.zareckii.dogs.domain.usecase.imageusecase.GetImageRandomUseCase
+import com.zareckii.dogs.domain.usecase.imageusecase.GetImageUseCase
+import com.zareckii.dogs.domain.usecase.imageusecase.GetImagesUseCase
+import com.zareckii.dogs.domain.model.ImageFavorite
+import com.zareckii.dogs.domain.usecase.imageusecase.UpdateImageFavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

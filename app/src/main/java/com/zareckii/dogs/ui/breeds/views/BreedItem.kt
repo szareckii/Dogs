@@ -29,7 +29,11 @@ fun BreedItem(
         backgroundColor = MaterialTheme.colors.secondary,
         onClick = onClick
     ) {
-        Text(text = breed.breedName.capitalize(Locale.current), modifier = Modifier.padding(16.dp))
+        Text(
+            text = breed.breedName.capitalize(Locale.current),
+            modifier = Modifier.padding(16.dp),
+            style = MaterialTheme.typography.body1
+        )
     }
 
 }

@@ -3,7 +3,6 @@ package com.zareckii.dogs.ui.theme
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
@@ -11,19 +10,28 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val DarkColorScheme = darkColors(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    error = Red80,
-    surface = Purple80
+val LightColors = lightColors(
+    primary = light_primary,
+    onPrimary = light_onPrimary,
+    secondary = light_secondary,
+    onSecondary = light_onSecondary,
+    error = light_error,
+    onError = light_onError,
+    background = light_background,
+    onBackground = light_onBackground,
 )
 
-private val LightColorScheme = lightColors(
-    primary = Purple,
-    secondary = Grey40,
-    error = Red80,
-    surface = PurpleGrey40
+val DarkColors  = lightColors(
+    primary = dark_primary,
+    onPrimary = dark_onPrimary,
+    secondary = dark_secondary,
+    onSecondary = dark_onSecondary,
+    error = dark_error,
+    onError = dark_onError,
+    background = dark_background,
+    onBackground = dark_onBackground,
 )
+
 
 @Composable
 fun DogsTheme(
@@ -31,8 +39,8 @@ fun DogsTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> DarkColors
+        else -> LightColors
     }
     val view = LocalView.current
     if (!view.isInEditMode) {
