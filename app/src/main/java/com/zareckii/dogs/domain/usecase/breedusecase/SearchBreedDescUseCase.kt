@@ -5,13 +5,14 @@ import com.zareckii.dogs.domain.repository.BreedRepository
 import com.zareckii.dogs.domain.usecase.UseCase
 import com.zareckii.dogs.ui.breeds.models.BreedUi
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetBreedDbUseCase @Inject constructor(
+class SearchBreedDescUseCase @Inject constructor(
     private val breedRepository: BreedRepository,
     @IoDispatcher dispatcher: CoroutineDispatcher
-) : UseCase<String, BreedUi>(dispatcher) {
-    override suspend fun execute(parameters: String): BreedUi {
-        return breedRepository.getBreedDb(parameters)
+) : UseCase<String, Flow<List<BreedUi>>>(dispatcher) {
+    override suspend fun execute(parameters: String): Flow<List<BreedUi>> {
+        return breedRepository.searchBreedDesc(parameters.lowercase())
     }
 }

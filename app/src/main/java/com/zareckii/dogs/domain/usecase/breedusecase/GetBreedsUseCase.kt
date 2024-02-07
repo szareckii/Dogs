@@ -8,9 +8,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
 class GetBreedsUseCase @Inject constructor(
-    private val imageRepository: BreedRepository,
+    private val breedRepository: BreedRepository,
     @IoDispatcher dispatcher: CoroutineDispatcher
 ) : UseCase<Unit, List<BreedUi>>(dispatcher) {
     override suspend fun execute(parameters: Unit): List<BreedUi> =
-        imageRepository.getBreeds()
+        breedRepository.getBreeds()
 }

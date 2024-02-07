@@ -7,10 +7,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
 class FetchBreedsDbUseCase @Inject constructor(
-    private val imageRepository: BreedRepository,
+    private val breedRepository: BreedRepository,
     @IoDispatcher dispatcher: CoroutineDispatcher
 ) : UseCase<Unit, Unit>(dispatcher) {
     override suspend fun execute(parameters: Unit) {
-        imageRepository.fetchBreedsDb()
+        breedRepository.fetchBreedsDb()
     }
 }

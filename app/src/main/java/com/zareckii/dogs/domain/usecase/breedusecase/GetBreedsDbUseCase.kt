@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetBreedsDbUseCase @Inject constructor(
-    private val imageRepository: BreedRepository,
+    private val breedRepository: BreedRepository,
     @IoDispatcher dispatcher: CoroutineDispatcher
 ) : UseCase<Unit, Flow<List<BreedUi>>>(dispatcher) {
     override suspend fun execute(parameters: Unit): Flow<List<BreedUi>> {
-        return imageRepository.getBreedsDb()
+        return breedRepository.getBreedsDb()
     }
 }
