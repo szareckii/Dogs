@@ -19,4 +19,5 @@
     <string name="search_icon">Search icon</string>
     <string name="back_icon">Back icon</string>
     <string name="breeds_not_found">Breeds not found</string>
+    <string name="connection_error">Connection error</string>
 </resources>

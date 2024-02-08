@@ -20,9 +20,9 @@ interface BreedsDao {
     suspend fun insertAllBreeds(breeds: List<BreedEntity>)
 
     @Query("SELECT * FROM breeds WHERE LOWER(breed_name) LIKE  '%' || :breed || '%' ORDER BY breed_name ASC")
-    fun searchBreedAsc(breed: String): Flow<List<BreedEntity>>
+    suspend fun searchBreedAsc(breed: String): List<BreedEntity>
 
     @Query("SELECT * FROM breeds WHERE LOWER(breed_name) LIKE  '%' || :breed || '%' ORDER BY breed_name DESC")
-    fun searchBreedDesc(breed: String): Flow<List<BreedEntity>>
+    suspend fun searchBreedDesc(breed: String): List<BreedEntity>
 
 }

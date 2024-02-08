@@ -68,17 +68,17 @@ class LocalDataSourceImpl @Inject constructor(
             emptyFlow()
         }
 
-    override fun searchBreedAsc(breed: String): Flow<List<BreedEntity>> =
+    override suspend fun searchBreedAsc(breed: String): List<BreedEntity> =
         try {
             breedsDao.searchBreedAsc(breed)
         } catch (_: Exception) {
-            emptyFlow()
+            emptyList()
         }
 
-    override fun searchBreedDesc(breed: String): Flow<List<BreedEntity>> =
+    override suspend fun searchBreedDesc(breed: String): List<BreedEntity> =
         try {
             breedsDao.searchBreedDesc(breed)
         } catch (_: Exception) {
-            emptyFlow()
+            emptyList()
         }
 }

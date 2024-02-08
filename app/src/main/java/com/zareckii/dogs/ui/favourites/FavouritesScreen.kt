@@ -40,10 +40,16 @@ fun FavoritesScreen(
         if (isLoading)
             CircularProgressIndicatorDefault()
         else if (breeds.isEmpty())
-            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(MaterialTheme.colors.primary),
+                contentAlignment = Alignment.Center
+            ) {
                 Text(
                     text = stringResource(R.string.no_favourites),
-                    style = MaterialTheme.typography.body1
+                    style = MaterialTheme.typography.body1,
+                    color = MaterialTheme.colors.onPrimary
                 )
             }
         else

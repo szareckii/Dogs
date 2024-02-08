@@ -16,6 +16,6 @@ interface LocalDataSource {
     suspend fun getImage(imageUrl: String): ImageEntity
     fun getFavoriteBreeds(): Flow<List<ImageLastFavorite>>
     fun getFavoriteImages(breed: String): Flow<List<String>>
-    fun searchBreedAsc(breed: String): Flow<List<BreedEntity>>
-    fun searchBreedDesc(breed: String): Flow<List<BreedEntity>>
+    suspend fun searchBreedAsc(breed: String): List<BreedEntity>
+    suspend fun searchBreedDesc(breed: String): List<BreedEntity>
 }

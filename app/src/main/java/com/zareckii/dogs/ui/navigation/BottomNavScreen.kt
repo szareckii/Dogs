@@ -50,15 +50,10 @@ fun BottomNavScreen(
     LaunchedEffect(isOffline) {
 
         if (isOffline) {
-            val result = scaffoldState.snackbarHostState.showSnackbar(
+            scaffoldState.snackbarHostState.showSnackbar(
                 message = noConnection,
                 duration = SnackbarDuration.Indefinite
             )
-
-            when (result) {
-                SnackbarResult.ActionPerformed -> {}
-                else -> {}
-            }
         }
     }
 

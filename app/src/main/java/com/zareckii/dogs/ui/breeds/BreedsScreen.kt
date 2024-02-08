@@ -1,11 +1,13 @@
 package com.zareckii.dogs.ui.breeds
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -14,21 +16,27 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
+import androidx.compose.material.Snackbar
+import androidx.compose.material.SnackbarDuration
+import androidx.compose.material.SnackbarHost
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDownward
 import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.LifecycleStartEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.zareckii.dogs.ui.breeds.models.BreedsAction
 import com.zareckii.dogs.ui.breeds.views.BreedItem
 import com.zareckii.dogs.ui.breeds.views.BreedsNotFound
 import com.zareckii.dogs.ui.breeds.views.ExpandableSearchView
 import com.zareckii.dogs.ui.components.CircularProgressIndicatorDefault
+import com.zareckii.dogs.ui.components.SnackbarDefault
 import kotlinx.coroutines.launch
 
 @Composable
@@ -42,10 +50,26 @@ fun BreedsScreen(
 
     val lazyState = rememberLazyListState()
     val scope = rememberCoroutineScope()
+    val scaffoldState = rememberScaffoldState()
 
     with(viewState.value) {
+
+        LifecycleStartEffect{
+            onStopOrDispose {
+                breedsViewModel.actionInvoked()
+            }
+        }
+
         Scaffold(
-            scaffoldState = rememberScaffoldState(),
+            scaffoldState = scaffoldState,
+            snackbarHost = {
+                SnackbarHost(hostState = it) { data ->
+                    SnackbarDefault(
+                        modifier = Modifier.offset(y = (-70).dp),
+                        snackbarData = data,
+                    )
+                }
+            },
             topBar = {
                 Row(
                     modifier = Modifier
@@ -54,10 +78,10 @@ fun BreedsScreen(
                 ) {
                     ExpandableSearchView(
                         modifier = Modifier.weight(6F),
-                        searchDisplay = searchText,
+                        searchText = searchText,
                         showSearch = showSearch,
                         onSearchDisplayChanged = { breedsViewModel.onSearchTextChange(it) },
-                        onSearchDisplayClosed = { breedsViewModel.onSearchTextChange("") },
+                        onSearchDisplayClosed = breedsViewModel::onSearchDisplayClosed,
                         onExpandedChanged = { breedsViewModel.onExpandedChanged(it) },
                     )
 
@@ -65,7 +89,7 @@ fun BreedsScreen(
                         modifier = Modifier.weight(1F),
                         onClick = {
                             scope.launch {
-                                breedsViewModel.onClickAsdDesc()
+                                breedsViewModel.onClickSorted()
                                 lazyState.scrollToItem(0)
                             }
                         }
@@ -103,5 +127,17 @@ fun BreedsScreen(
                 }
             }
         }
+
+
+        LaunchedEffect(breedsAction) {
+            when (breedsAction) {
+                is BreedsAction.SnackbarShow -> {
+                    scaffoldState.snackbarHostState.showSnackbar(snackbarMessage)
+                }
+
+                else -> {}
+            }
+        }
+
     }
 }

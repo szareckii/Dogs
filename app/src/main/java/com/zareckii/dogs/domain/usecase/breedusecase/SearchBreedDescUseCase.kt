@@ -11,8 +11,8 @@ import javax.inject.Inject
 class SearchBreedDescUseCase @Inject constructor(
     private val breedRepository: BreedRepository,
     @IoDispatcher dispatcher: CoroutineDispatcher
-) : UseCase<String, Flow<List<BreedUi>>>(dispatcher) {
-    override suspend fun execute(parameters: String): Flow<List<BreedUi>> {
+) : UseCase<String, List<BreedUi>>(dispatcher) {
+    override suspend fun execute(parameters: String): List<BreedUi> {
         return breedRepository.searchBreedDesc(parameters.lowercase())
     }
 }

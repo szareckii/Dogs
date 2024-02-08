@@ -1,7 +1,10 @@
 package com.zareckii.dogs.ui.breeddetail
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.zareckii.dogs.R
+import com.zareckii.dogs.data.network.Result
 import com.zareckii.dogs.data.network.successOr
 import com.zareckii.dogs.domain.usecase.imageusecase.FetchImagesDbUseCase
 import com.zareckii.dogs.ui.breeddetail.models.BreedDetailViewState
@@ -10,6 +13,9 @@ import com.zareckii.dogs.domain.usecase.imageusecase.GetImageUseCase
 import com.zareckii.dogs.domain.usecase.imageusecase.GetImagesUseCase
 import com.zareckii.dogs.domain.model.ImageFavorite
 import com.zareckii.dogs.domain.usecase.imageusecase.UpdateImageFavoriteUseCase
+import com.zareckii.dogs.ui.breeddetail.models.BreedDetailAction
+import com.zareckii.dogs.ui.breeds.models.BreedsAction
+import com.zareckii.dogs.utils.ManageResources
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -25,7 +31,8 @@ class BreedDetailViewModel @Inject constructor(
     private val getImagesUseCase: GetImagesUseCase,
     private val fetchImagesDbUseCase: FetchImagesDbUseCase,
     private val updateImageFavoriteUseCase: UpdateImageFavoriteUseCase,
-    private val getImageUseCase: GetImageUseCase
+    private val getImageUseCase: GetImageUseCase,
+    private val resources: ManageResources
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(BreedDetailViewState())
@@ -53,7 +60,20 @@ class BreedDetailViewModel @Inject constructor(
                 }
 
                 launch {
-                    fetchImagesDbUseCase(breed)
+                    val result = fetchImagesDbUseCase(breed)
+
+                    Log.e("stas", "result -> $result")
+
+                    if (result is Result.Success)
+                        _viewState.update { it.copy(breedDetailAction = BreedDetailAction.None) }
+                    else {
+                        _viewState.update {
+                            it.copy(
+                                breedDetailAction = BreedDetailAction.SnackbarShow,
+                                snackbarMessage = resources.string(R.string.connection_error)
+                            )
+                        }
+                    }
                 }
             }
     }
@@ -72,5 +92,7 @@ class BreedDetailViewModel @Inject constructor(
         val nextImage = _viewState.value.images.randomOrNull()
         _viewState.update { it.copy(currentImage = nextImage) }
     }
+
+    fun actionInvoked() = _viewState.update { it.copy(breedDetailAction = BreedDetailAction.None) }
 
 }
