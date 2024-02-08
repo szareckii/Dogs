@@ -40,7 +40,7 @@ fun BreedDetailScreen(
     }
 
     with(viewState.value) {
-        LifecycleStartEffect{
+        LifecycleStartEffect {
             onStopOrDispose {
                 breedDetailViewModel.actionInvoked()
             }

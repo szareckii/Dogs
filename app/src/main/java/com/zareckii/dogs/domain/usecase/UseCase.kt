@@ -2,13 +2,12 @@ package com.zareckii.dogs.domain.usecase
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.zareckii.dogs.data.network.Result
 import com.zareckii.dogs.data.network.model.ErrorMessage
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
-import com.zareckii.dogs.data.network.Result
 import retrofit2.HttpException
 import java.io.IOException
-
 
 abstract class UseCase<in P, R>(private val coroutineDispatcher: CoroutineDispatcher) {
     suspend operator fun invoke(parameters: P): Result<R> {

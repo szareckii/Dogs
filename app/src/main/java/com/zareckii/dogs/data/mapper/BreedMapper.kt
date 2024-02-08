@@ -44,7 +44,11 @@ interface BreedMapper {
 
         override fun mapImageLstFavoriteToUI(names: List<ImageLastFavorite>): List<BreedUi> =
             names.map { breed ->
-                BreedUi(breedName = breed.breedName, subBreeds = emptyList(), imageUrl = breed.imageUrl)
+                BreedUi(
+                    breedName = breed.breedName,
+                    subBreeds = emptyList(),
+                    imageUrl = breed.imageUrl
+                )
             }
 
     }

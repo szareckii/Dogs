@@ -11,6 +11,5 @@ import androidx.compose.ui.Modifier
 fun CircularProgressIndicatorDefault() {
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         CircularProgressIndicator()
-//    CircularProgressIndicator(color = AppTheme.colors.primaryColor)
     }
 }

@@ -1,6 +1,5 @@
 package com.zareckii.dogs.ui.breeds
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zareckii.dogs.R

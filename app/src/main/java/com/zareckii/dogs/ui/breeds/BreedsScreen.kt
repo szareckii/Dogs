@@ -1,6 +1,5 @@
 package com.zareckii.dogs.ui.breeds
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,8 +15,6 @@ import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Snackbar
-import androidx.compose.material.SnackbarDuration
 import androidx.compose.material.SnackbarHost
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDownward
@@ -25,7 +22,6 @@ import androidx.compose.material.icons.filled.ArrowUpward
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -37,7 +33,6 @@ import com.zareckii.dogs.ui.breeds.views.BreedsNotFound
 import com.zareckii.dogs.ui.breeds.views.ExpandableSearchView
 import com.zareckii.dogs.ui.components.CircularProgressIndicatorDefault
 import com.zareckii.dogs.ui.components.SnackbarDefault
-import kotlinx.coroutines.launch
 
 @Composable
 fun BreedsScreen(
@@ -49,12 +44,11 @@ fun BreedsScreen(
     val viewState = breedsViewModel.viewState.collectAsStateWithLifecycle()
 
     val lazyState = rememberLazyListState()
-    val scope = rememberCoroutineScope()
     val scaffoldState = rememberScaffoldState()
 
     with(viewState.value) {
 
-        LifecycleStartEffect{
+        LifecycleStartEffect {
             onStopOrDispose {
                 breedsViewModel.actionInvoked()
             }
@@ -87,12 +81,7 @@ fun BreedsScreen(
 
                     IconButton(
                         modifier = Modifier.weight(1F),
-                        onClick = {
-                            scope.launch {
-                                breedsViewModel.onClickSorted()
-                                lazyState.scrollToItem(0)
-                            }
-                        }
+                        onClick = breedsViewModel::onClickSorted
                     ) {
                         Icon(
                             if (isSortedAsc == null || isSortedAsc) Icons.Default.ArrowDownward else Icons.Default.ArrowUpward,
@@ -112,7 +101,7 @@ fun BreedsScreen(
                     .fillMaxSize()
                     .padding(innerPadding)
                     .padding(padding)
-                    .background(MaterialTheme.colors.primary),
+                    .background(MaterialTheme.colors.background),
                 state = lazyState,
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)

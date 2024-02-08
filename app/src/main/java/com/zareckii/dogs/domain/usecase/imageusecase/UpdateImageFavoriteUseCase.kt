@@ -14,7 +14,7 @@ class UpdateImageFavoriteUseCase @Inject constructor(
     private val now: Now
 ) : UseCase<ImageFavorite, Unit>(dispatcher) {
     override suspend fun execute(parameters: ImageFavorite) {
-        val time = if ( parameters.isFavorite) now.time() else null
+        val time = if (parameters.isFavorite) now.time() else null
         imageRepository.updateImageFavorite(parameters.imageUrl, parameters.isFavorite, time)
     }
 }

@@ -60,7 +60,7 @@ fun FavoriteImagesScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(padding)
-                        .background(MaterialTheme.colors.primary),
+                        .background(MaterialTheme.colors.background),
                     contentPadding = PaddingValues(16.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {

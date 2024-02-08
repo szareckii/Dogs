@@ -43,13 +43,13 @@ fun FavoritesScreen(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(MaterialTheme.colors.primary),
+                    .background(MaterialTheme.colors.background),
                 contentAlignment = Alignment.Center
             ) {
                 Text(
                     text = stringResource(R.string.no_favourites),
-                    style = MaterialTheme.typography.body1,
-                    color = MaterialTheme.colors.onPrimary
+                    style = MaterialTheme.typography.h5,
+                    color = MaterialTheme.colors.onSurface
                 )
             }
         else
@@ -57,7 +57,7 @@ fun FavoritesScreen(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(innerPadding)
-                    .background(MaterialTheme.colors.primary),
+                    .background(MaterialTheme.colors.background),
                 state = rememberLazyListState(),
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)

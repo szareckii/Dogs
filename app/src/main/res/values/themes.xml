@@ -2,4 +2,12 @@
 <resources>
 
     <style name="Theme.Dogs" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.SplashScreenTheme" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/color_primary</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/bg_splash</item>
+        <item name="windowSplashScreenAnimationDuration">200</item>
+        <item name="postSplashScreenTheme">@style/Theme.Dogs</item>
+    </style>
+
 </resources>
