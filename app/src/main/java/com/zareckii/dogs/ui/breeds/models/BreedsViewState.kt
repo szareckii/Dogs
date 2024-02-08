@@ -8,6 +8,6 @@ data class BreedsViewState(
     val breeds: List<BreedUi> = emptyList(),
     val searchBreeds: List<BreedUi> = emptyList(),
     val searchText: String = "",
-    val showSearch: Boolean = false
-
+    val showSearch: Boolean = false,
+    val isSortedAsc: Boolean? = null
 )

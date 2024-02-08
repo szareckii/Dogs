@@ -1,5 +1,6 @@
 package com.zareckii.dogs.ui.breeds
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.zareckii.dogs.data.network.successOr
@@ -12,7 +13,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.update
@@ -38,6 +38,7 @@ class BreedsViewModel @Inject constructor(
                 val breedsFlow = getBreedsDbUseCase(Unit).successOr(emptyFlow())
                 breedsFlow
                     .distinctUntilChanged()
+//                    .debounce(3000)
                     .collect { breeds ->
                         _viewState.update {
                             it.copy(
@@ -54,7 +55,9 @@ class BreedsViewModel @Inject constructor(
     }
 
     fun onSearchTextChange(searchText: String) {
-        val searchBreeds = _viewState.value.breeds.filter { searchText in it.breedName }
+        val searchBreeds = _viewState.value.breeds.filter {
+            searchText.lowercase() in it.breedName.lowercase()
+        }
         _viewState.update {
             it.copy(
                 searchText = searchText,
@@ -63,8 +66,6 @@ class BreedsViewModel @Inject constructor(
         }
     }
 
-
-    //уюраьт потоки для сортировки. сортировать список для поиска
     fun onExpandedChanged(showSearch: Boolean) =
         _viewState.update {
             it.copy(
@@ -74,17 +75,17 @@ class BreedsViewModel @Inject constructor(
             )
         }
 
-    @OptIn(FlowPreview::class)
     fun onClickAsdDesc() {
         viewModelScope.launch {
-            val breedsFlow =
-                searchBreedDescUseCase(_viewState.value.searchText).successOr(emptyFlow())
-            breedsFlow
-                .distinctUntilChanged()
-                .debounce(500)
-                .collect { breeds ->
-                    _viewState.update { it.copy(breeds = breeds) }
-                }
+            val searchBreeds = _viewState.value.breeds.filter {
+                _viewState.value.searchText.lowercase() in it.breedName.lowercase()
+            }.reversed()
+
+            Log.e("stas", "$searchBreeds")
+            val sorted = _viewState.value.isSortedAsc ?: false
+
+            _viewState.update { it.copy(searchBreeds = searchBreeds, isSortedAsc = !sorted) }
+
         }
     }
 }

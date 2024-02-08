@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface BreedsDao {
 
-    @Query("SELECT * FROM breeds")
+    @Query("SELECT * FROM breeds ORDER BY breed_name ASC")
     fun getAllBreeds(): Flow<List<BreedEntity>>
 
     @Query("SELECT * FROM breeds WHERE breed_name = :breed")
